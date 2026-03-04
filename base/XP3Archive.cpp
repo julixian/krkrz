@@ -27,7 +27,17 @@ bool TVPAllowExtractProtectedStorage = true;
 //---------------------------------------------------------------------------
 // archive filter related
 //---------------------------------------------------------------------------
-tTVPXP3ArchiveExtractionFilter TVPXP3ArchiveExtractionFilter  = NULL;
+static void TVP_tTVPXP3ArchiveExtractionFilter_CONVENTION
+	TVPDefaultXP3ArchiveExtractionFilter(tTVPXP3ExtractionFilterInfo *info)
+{
+	if(!info || !info->Buffer) return;
+	tjs_uint8 *buffer = static_cast<tjs_uint8 *>(info->Buffer);
+	for(tjs_uint i = 0; i < info->BufferSize; i++)
+		buffer[i] ^= 0x76;
+}
+
+tTVPXP3ArchiveExtractionFilter TVPXP3ArchiveExtractionFilter  =
+	TVPDefaultXP3ArchiveExtractionFilter;
 void TVPSetXP3ArchiveExtractionFilter(tTVPXP3ArchiveExtractionFilter filter)
 {
 	TVPXP3ArchiveExtractionFilter = filter;
