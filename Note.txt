@@ -1,0 +1,2 @@
+TVPDefaultXP3ArchiveExtractionFilter
+TVP_TEXT_READ_ANSI_MBCS
